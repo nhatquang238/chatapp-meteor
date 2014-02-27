@@ -6,6 +6,7 @@
   "packages": {
     "iron-router": {},
     "scss": {},
-    "bootstrap3-sass": {}
+    "bootstrap3-sass": {},
+    "spin": {}
   }
 }

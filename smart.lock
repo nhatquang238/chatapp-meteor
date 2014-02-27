@@ -2,13 +2,14 @@
   "meteor": {
     "git": "https://github.com/meteor/meteor.git",
     "branch": "master",
-    "commit": "77a474bdb49db04ebbb19b8cfcec9346e1b944d4"
+    "commit": "4555d2c8e4f7389d9d5fadd39d381fdb080ed742"
   },
   "dependencies": {
     "basePackages": {
       "iron-router": {},
       "scss": {},
-      "bootstrap3-sass": {}
+      "bootstrap3-sass": {},
+      "spin": {}
     },
     "packages": {
       "iron-router": {
@@ -25,6 +26,11 @@
         "git": "https://github.com/reywood/meteor-bootstrap3-sass.git",
         "tag": "v3.0.2-1d",
         "commit": "c90eef6ac97157acbf3cb7b732806a9ff5f164fc"
+      },
+      "spin": {
+        "git": "https://github.com/SachaG/meteor-spin.git",
+        "tag": "v0.2.2",
+        "commit": "3f655f0016228e4195acc784c45d3e3a247dc39f"
       }
     }
   }

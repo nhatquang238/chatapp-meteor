@@ -7,6 +7,7 @@
     "iron-router": {},
     "scss": {},
     "bootstrap3-sass": {},
-    "spin": {}
+    "spin": {},
+    "accounts-ui-bootstrap-3": {}
   }
 }

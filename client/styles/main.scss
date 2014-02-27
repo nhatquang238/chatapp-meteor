@@ -1,8 +1,9 @@
 @import 'packages/bootstrap3-sass/bootstrap';
 
-html {
-    // background: black;
-}
+// variables
+$green: #2FA65C;
+
+// styling
 
 body {
     background: #fafafa;
@@ -10,15 +11,7 @@ body {
     color: #333;
 }
 
-$green-bs: #2FA65C;
-
-.beenmail {
-    border-left: 1px solid #bbb;
-    border-right: 1px solid #bbb;
-    padding: 0 15px;
-}
-
-input.search-mail {
+input.search-conversation {
     width: 100%;
     box-sizing: border-box;
     padding: 4px 6px;
@@ -63,7 +56,7 @@ input.search-mail {
 }
 
 .active {
-    background: $green-bs !important;
+    background: $green !important;
     color: #f2f2f2;
 }
 
@@ -81,7 +74,7 @@ input.search-mail {
         background: #f5f5f5;
     }
     &:before {
-        background: $green-bs;
+        background: $green;
     }
 }
 
@@ -105,11 +98,11 @@ input.search-mail {
     cursor: pointer;
 }
 
-.message {
+.messages {
+    height: 30em;
     background: #fff;
-    padding: 15px 15px 30px;
+    padding: 0.5em 1em;
     border: 1px solid #ccc;
-    // border-radius: 4px;
     margin-bottom: 0.5em;
     position: relative;
 
@@ -118,26 +111,29 @@ input.search-mail {
         line-height: 1.5em;
         margin-bottom: 0;
     }
-
-    &:hover .delete-message, &:hover .mail-action{
-        display: block;
-    }
 }
 
-.mail-head {
-    padding-bottom: 1.5em;
-    position: relative;
-}
-
-.sender, .receiver {
-    padding: 4px 10px;
-    border-radius: 20px;
+.sender {
     font-weight: bold;
-    background: #e5e5ee;
+    padding: 0.7em 0.5em 0.3em;
+    color: $green;
 }
 
-.beenmail-link {
-    position: relative;
+.content {
+    padding-left: 0.5em;
+}
+
+.create-message-container {
+    border: 1px solid #ccc;
+    background: #fff;
+}
+
+.message-content {
+    padding: 1em 1.5em;
+    height: 6em;
+    border: none;
+    resize: none;
+    outline: none;
 }
 
 .notification {
@@ -146,35 +142,36 @@ input.search-mail {
     right: 0;
 }
 
-.delete-message {
+.chat-main .glyphicon {
+    margin-right: .5em;
+}
+
+// control-menu bar
+.control-menu {
+    border-top: 1px solid #ccc;
+}
+
+.file, .photo, .send {
+    display: inline-block;
+    padding: .5em 1em;
+    color: #bbb;
+}
+
+.file, .photo {
+    border-right: 1px solid #ccc;
     cursor: pointer;
-    bottom: 50%;
-    right: 0;
-    font-size: 1.2em;
-}
-
-// mail-action
-
-.mail-action {
-    font-size: 1.2em;
-    display: none;
-    position: absolute;
-    left: 45%;
-}
-
-// New message
-.new-message {
-    padding-bottom: 1em;
     transition: all 0.3s ease-out;
-    transform: scale(1.02);
-}
-
-.message-content {
-    width: 96%;
+    &:hover {
+        color: #222;
+    }
 }
 
 .send {
-    text-align: center;
+    float: right;
+}
+// New message
+.message-content {
+    width: 100%;
 }
 
 .reply {
@@ -187,7 +184,7 @@ input.search-mail {
 }
 
 .reply:hover {
-    background: $green-bs;
+    background: $green;
     color: white;
 }
 

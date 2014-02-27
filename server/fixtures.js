@@ -23,3 +23,15 @@ if (Messages.find().count() === 0) {
 		read: 0
 	});
 }
+
+if (Conversations.find().count() === 0) {
+	Conversations.insert({
+		from: "Ace",
+		to: "Shawn"
+	});
+
+	Conversations.insert({
+		from: "Ace",
+		to: "creepyfatcookie"
+	});
+}

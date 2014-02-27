@@ -1,32 +1,36 @@
 <template name="chat">
-	<div class="col-md-12 beenmail">
+	<div class="col-md-12 chat-container">
 		<div class="col-md-4 preview">
-			<input type="text" class="search-mail" placeholder="Search inbox">
-			{{#each messages}}
+			<input type="text" class="search-conversation" placeholder="Search inbox">
+			{{#each messagePreviews}}
 			<div class="message-preview new">
 				<h3 class="name">{{to}}</h3>
 				<span class="glyphicon glyphicon-remove delete-conversation"></span>
 			</div>
 			{{/each}}
 		</div>
-		<div class="col-md-8 messages">
+		<div class="col-md-8 chat-main">
 			<div class="control-btn">
-				<div class="btn btn-primary new-mail">New conversation</div>
+				<div class="btn btn-primary new-conversation"><span class="glyphicon glyphicon-plus"></span>New conversation</div>
 			</div>
-			{{#each messages}}
-			<div class="message">
-				<div class="mail-head">
-					<p><span class="sender">{{from}}</span> to  <span class="receiver">{{to}}</span></p>
-					<span class="glyphicon glyphicon-remove delete-message"></span>
+			<div class="messages">
+				{{#each messages}}
+				<div class="message">
+					<p class="sender">{{from}}</p>
+					<div class="content">
+						{{content}}
+					</div>
 				</div>
-				<div class="content">
-					{{content}}
-				</div>
-				<div class="mail-action">
-					<span class="glyphicon glyphicon-share-alt reply"></span>
+				{{/each}}
+			</div>
+			<div class="create-message-container">
+				<textarea name="message-content" id="message-content" class="message-content" cols="30" rows="10" placeholder="Write a reply..."></textarea>
+				<div class="control-menu">
+					<span class="file"><span class="glyphicon glyphicon-file"></span>Add files</span>
+					<span class="photo"><span class="glyphicon glyphicon-camera"></span>Add photos</span>
+					<span class="send">Press Enter to send</span>
 				</div>
 			</div>
-			{{/each}}
 		</div>
 	</div>
 </template>

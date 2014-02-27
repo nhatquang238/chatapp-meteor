@@ -1,0 +1,32 @@
+<template name="chat">
+	<div class="col-md-12 beenmail">
+		<div class="col-md-4 preview">
+			<input type="text" class="search-mail" placeholder="Search inbox">
+			{{#each messages}}
+			<div class="message-preview new">
+				<h3 class="name">{{to}}</h3>
+				<span class="glyphicon glyphicon-remove delete-conversation"></span>
+			</div>
+			{{/each}}
+		</div>
+		<div class="col-md-8 messages">
+			<div class="control-btn">
+				<div class="btn btn-primary new-mail">New conversation</div>
+			</div>
+			{{#each messages}}
+			<div class="message">
+				<div class="mail-head">
+					<p><span class="sender">{{from}}</span> to  <span class="receiver">{{to}}</span></p>
+					<span class="glyphicon glyphicon-remove delete-message"></span>
+				</div>
+				<div class="content">
+					{{content}}
+				</div>
+				<div class="mail-action">
+					<span class="glyphicon glyphicon-share-alt reply"></span>
+				</div>
+			</div>
+			{{/each}}
+		</div>
+	</div>
+</template>

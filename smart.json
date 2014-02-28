@@ -9,6 +9,7 @@
     "bootstrap3-sass": {},
     "spin": {},
     "accounts-ui-bootstrap-3": {},
-    "collection2": {}
+    "collection2": {},
+    "autocompletion": {}
   }
 }

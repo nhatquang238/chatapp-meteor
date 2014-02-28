@@ -1,15 +1,15 @@
 <template name="chat">
-	<div class="col-md-12 chat-container">
-		<div class="col-md-4 preview">
+	<div class="col-md-12 col-sm-12 col-xs-12">
+		<div class="col-md-4 col-sm-4 col-xs-4 preview">
 			<input type="text" class="search-conversation" placeholder="Search inbox">
 			{{#each messagePreviews}}
 			<div class="message-preview new">
-				<h3 class="name">{{to}}</h3>
+				<h3 class="name">{{members}}</h3>
 				<span class="glyphicon glyphicon-remove delete-conversation"></span>
 			</div>
 			{{/each}}
 		</div>
-		<div class="col-md-8 chat-main">
+		<div class="col-md-8 col-sm-8 col-xs-8 chat-main">
 			<div class="control-btn">
 				<div class="btn btn-primary new-conversation" id="new-conversation"><span class="glyphicon glyphicon-plus"></span>New conversation</div>
 			</div>

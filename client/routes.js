@@ -22,4 +22,11 @@ Router.map(function() {
   		'newMessage': {to: 'newMessage'}
   	}
   });
+  this.route('conversation', {
+  	path: '/conversations/:members',
+  	template: 'chat',
+  	yieldTemplates: {
+  		'messages': {to: 'messages'}
+  	}
+  });
 });

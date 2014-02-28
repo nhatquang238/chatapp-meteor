@@ -11,6 +11,10 @@ body {
     color: #333;
 }
 
+.chat-container {
+    max-width: 1024px;
+}
+
 input.search-conversation {
     width: 100%;
     box-sizing: border-box;
@@ -169,6 +173,7 @@ input.search-conversation {
     & input {
         outline: none;
         border: none;
+        width: 94%;
     }
 }
 

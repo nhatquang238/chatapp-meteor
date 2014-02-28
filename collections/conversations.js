@@ -1,7 +1,7 @@
 Conversations = new Meteor.Collection('conversations', {
 	schema: new SimpleSchema({
 		members: {
-			type: Object,
+			type: String,
 			label: 'Members'
 		}
 	})

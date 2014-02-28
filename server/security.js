@@ -8,4 +8,10 @@ Messages.allow({
   remove: function() {
     return true;
   }
-})
+});
+
+Conversations.allow({
+	insert: function (userId, doc) {
+		return !! userId;
+	}
+});

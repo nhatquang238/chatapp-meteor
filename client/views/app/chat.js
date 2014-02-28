@@ -1,11 +1,11 @@
 Template.chat.helpers({
-	messages: function () {
-		return Messages.find();
-	},
 	messagePreviews: function () {
 		return Conversations.find();
 	}
 });
 
 Template.chat.events({
+	'click #new-conversation': function () {
+		Router.go('newConversation');
+	}
 });

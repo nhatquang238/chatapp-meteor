@@ -11,13 +11,15 @@ Router.map(function() {
   this.route('chat', {
     path: '/',
     template: 'chat',
-    data: function () {
-    	var params = this.params;
-    	return params;
+    yieldTemplates: {
+    	'messages': {to: 'messages'}
     }
   });
   this.route('newConversation', {
   	path: '/new',
-  	template: 'newConversation'
+  	template: 'chat',
+  	yieldTemplates: {
+  		'newMessage': {to: 'newMessage'}
+  	}
   });
 });

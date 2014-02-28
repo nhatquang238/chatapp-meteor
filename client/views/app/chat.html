@@ -11,20 +11,14 @@
 		</div>
 		<div class="col-md-8 chat-main">
 			<div class="control-btn">
-				<div class="btn btn-primary new-conversation"><span class="glyphicon glyphicon-plus"></span>New conversation</div>
+				<div class="btn btn-primary new-conversation" id="new-conversation"><span class="glyphicon glyphicon-plus"></span>New conversation</div>
 			</div>
-			<div class="messages">
-				{{#each messages}}
-				<div class="message">
-					<p class="sender">{{from}}</p>
-					<div class="content">
-						{{content}}
-					</div>
-				</div>
-				{{/each}}
+			<div class="main-container">
+				{{yield "messages"}}
+				{{yield "newMessage"}}
 			</div>
 			<div class="create-message-container">
-				<textarea name="message-content" id="message-content" class="message-content" cols="30" rows="10" placeholder="Write a reply..."></textarea>
+				<textarea name="message-content" id="message-content" class="message-content" cols="30" rows="10" placeholder="Write a message..."></textarea>
 				<div class="control-menu">
 					<span class="file"><span class="glyphicon glyphicon-file"></span>Add files</span>
 					<span class="photo"><span class="glyphicon glyphicon-camera"></span>Add photos</span>

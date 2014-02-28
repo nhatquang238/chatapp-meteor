@@ -14,8 +14,11 @@ body {
 input.search-conversation {
     width: 100%;
     box-sizing: border-box;
-    padding: 4px 6px;
+    padding: 4px 10px;
     height: auto;
+    margin-bottom: 10px;
+    outline: none;
+    border: 1px solid #ddd;
 }
 
 .control-btn {
@@ -98,12 +101,18 @@ input.search-conversation {
     cursor: pointer;
 }
 
-.messages {
+.main-container, .messages {
     height: 30em;
-    background: #fff;
-    padding: 0.5em 1em;
-    border: 1px solid #ccc;
+}
+
+.main-container {
+    background: #eee;
     margin-bottom: 0.5em;
+}
+
+.messages {
+    border: 1px solid #ccc;
+    background: #fff;
     position: relative;
 
     & p {
@@ -115,12 +124,15 @@ input.search-conversation {
 
 .sender {
     font-weight: bold;
-    padding: 0.7em 0.5em 0.3em;
+    padding: 0.7em 1.5em 0.3em;
     color: $green;
+}
+.message:first-of-type .sender {
+    padding-top: 1em;
 }
 
 .content {
-    padding-left: 0.5em;
+    padding-left: 1.5em;
 }
 
 .create-message-container {
@@ -146,6 +158,20 @@ input.search-conversation {
     margin-right: .5em;
 }
 
+// new conversation
+.new-conversation-container {
+    background: #fff;
+    padding: 0.7em 1em 0.5em;
+    border: 1px solid #ccc;
+    & label {
+        font-weight: normal;
+    }
+    & input {
+        outline: none;
+        border: none;
+    }
+}
+
 // control-menu bar
 .control-menu {
     border-top: 1px solid #ccc;
@@ -169,6 +195,7 @@ input.search-conversation {
 .send {
     float: right;
 }
+
 // New message
 .message-content {
     width: 100%;

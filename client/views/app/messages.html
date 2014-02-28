@@ -1,0 +1,12 @@
+<template name="messages">
+	<div class="messages">
+		{{#each messages}}
+		<div class="message">
+			<p class="sender">{{from}}</p>
+			<div class="content">
+				{{content}}
+			</div>
+		</div>
+		{{/each}}
+	</div>
+</template>

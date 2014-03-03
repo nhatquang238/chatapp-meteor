@@ -37,10 +37,16 @@ Template.chat.events({
 
 				if ((duplicate === false) && (newConversation.members !== username)) {
 					newConversation._id = Conversations.insert(newConversation);
+					newMessage.conversationId = newConversation._id;
 					Messages.insert(newMessage);
 					Router.go('conversation', newConversation);
-				} else {
-					console.log('can\'t make duplicate conversation or talk to yourself');
+				} else if ((duplicate === true) && (newConversation.members !== username)) {
+					console.log('duplicate conversation, redirect to exising path');
+					var existingConversation = Conversations.findOne({members: newConversation.members});
+					newMessage.conversationId = existingConversation._id;
+					console.log(newMessage);
+					Messages.insert(newMessage);
+					Router.go('conversation', existingConversation);
 				}
 
 				$('#message-content').val('');

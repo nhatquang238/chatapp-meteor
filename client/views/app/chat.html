@@ -4,7 +4,7 @@
 			<input type="text" class="search-conversation" placeholder="Search inbox">
 			{{#each messagePreviews}}
 			<div class="message-preview new">
-				<h3 class="name">{{members}}</h3>
+				<a class="name" href="{{pathFor 'conversation'}}">{{members}}</a>
 				<span class="glyphicon glyphicon-remove delete-conversation"></span>
 			</div>
 			{{/each}}

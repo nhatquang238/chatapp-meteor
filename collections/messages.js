@@ -17,7 +17,7 @@ Messages = new Meteor.Collection('messages', {
 			label: 'To'
 		},
 		submittedTime: {
-			type: Date,
+			type: Number,
 			optional: true,
 			label: 'Submitted Time'
 		},

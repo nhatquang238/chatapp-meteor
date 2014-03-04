@@ -2,6 +2,10 @@
 $green: #2FA65C;
 
 // styling
+.jumbotron {
+    background: #fff;
+    color: #222;
+}
 
 body {
     background: #fafafa;
@@ -110,7 +114,7 @@ input.search-conversation {
 }
 
 .main-container, .messages {
-    height: 30em;
+    height: 26em;
 }
 
 .main-container {
@@ -119,6 +123,7 @@ input.search-conversation {
 }
 
 .messages {
+    overflow: scroll;
     border: 1px solid #ccc;
     background: #fff;
     position: relative;

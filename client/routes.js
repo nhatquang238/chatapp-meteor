@@ -13,7 +13,7 @@ Router.map(function() {
     path: '/',
     template: 'chat',
     yieldTemplates: {
-    	'messages': {to: 'messages'}
+      'messages': {to: 'messages'}
     }
   });
   this.route('newConversation', {
@@ -28,13 +28,21 @@ Router.map(function() {
   	template: 'chat',
   	yieldTemplates: {
   		'messages': {to: 'messages'}
-  	}
+  	},
+    after: function () {
+      // this.render();
+      $('.message-preview').first().click();
+    }
   });
 });
 
 var requiredLogin = function () {
   if (!Meteor.user()) {
-    this.render('accessDenied');
+    if (Meteor.loggingIn()) {
+      this.render('loading');
+    } else {
+      this.render('accessDenied');
+    }
     this.stop();
   }
 }

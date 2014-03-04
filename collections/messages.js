@@ -1,5 +1,9 @@
 Messages = new Meteor.Collection('messages', {
 	schema: new SimpleSchema({
+		userId: {
+			type: String,
+			label: 'UserId'
+		},
 		content: {
 			type: String,
 			label: 'Content'

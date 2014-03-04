@@ -3,7 +3,7 @@ Meteor.publish('messages', function() {
 });
 
 Meteor.publish('conversations', function () {
-	return Conversations.find();
+	return Conversations.find({members: Meteor.users.findOne(this.userId).username});
 });
 
 Meteor.publish('userData', function () {

@@ -1,17 +1,14 @@
+var signedIn = function (userId, doc) {
+  return !! userId;
+};
+
 Messages.allow({
-  insert: function() {
-    return true;
-  },
-  update: function() {
-    return true;
-  },
-  remove: function() {
-    return true;
-  }
+  insert: signedIn,
+  update: signedIn,
+  remove: signedIn
 });
 
+// only allow access to conversations collection if signed in
 Conversations.allow({
-	insert: function (userId, doc) {
-		return !! userId;
-	}
+	insert: signedIn
 });

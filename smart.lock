@@ -8,11 +8,11 @@
     "basePackages": {
       "iron-router": {},
       "scss": {},
-      "bootstrap3-sass": {},
       "spin": {},
       "accounts-ui-bootstrap-3": {},
       "collection2": {},
-      "autocompletion": {}
+      "autocompletion": {},
+      "bootstrap-3": {}
     },
     "packages": {
       "iron-router": {
@@ -24,11 +24,6 @@
         "git": "https://github.com/fourseven/meteor-scss.git",
         "tag": "v0.7.0",
         "commit": "39f60d58c2b890bdd897ef52188644f3093fc2ac"
-      },
-      "bootstrap3-sass": {
-        "git": "https://github.com/reywood/meteor-bootstrap3-sass.git",
-        "tag": "v3.0.2-1d",
-        "commit": "c90eef6ac97157acbf3cb7b732806a9ff5f164fc"
       },
       "spin": {
         "git": "https://github.com/SachaG/meteor-spin.git",
@@ -50,10 +45,15 @@
         "tag": "v0.1.4",
         "commit": "821cb4a85d94132edfc26e8f0c2a432c95485e79"
       },
+      "bootstrap-3": {
+        "git": "https://github.com/mangasocial/meteor-bootstrap-3.git",
+        "tag": "v3.1.0-1",
+        "commit": "329dccb08bfc18c635676dea600ac9953162cda9"
+      },
       "simple-schema": {
         "git": "https://github.com/aldeed/meteor-simple-schema.git",
-        "tag": "v0.2.39",
-        "commit": "02afc77cba60ce5829e453567ebac76e4b69bc81"
+        "tag": "v0.2.40",
+        "commit": "d22892daa943e3567916effeaafd794ca6af5cd2"
       },
       "jquery-ui": {
         "git": "https://github.com/TimHeckel/meteor-jquery-ui.git",

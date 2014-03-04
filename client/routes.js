@@ -3,7 +3,8 @@ Router.configure({
   notFoundTemplate: 'notFound',
   loadingTemplate: 'loading',
   waitOn: function () {
-  	return Meteor.subscribe('messages');
+  	// return [Meteor.subscribe('messages'), Meteor.subscribe('userData')];
+    return Meteor.subscribe('userData');
   }
 });
 
@@ -30,3 +31,12 @@ Router.map(function() {
   	}
   });
 });
+
+var requiredLogin = function () {
+  if (!Meteor.user()) {
+    this.render('accessDenied');
+    this.stop();
+  }
+}
+
+Router.before(requiredLogin);

@@ -3,7 +3,6 @@ accounts-base
 accounts-password
 iron-router
 scss
-bootstrap3-sass
 spin
 accounts-github
 accounts-ui-bootstrap-3
@@ -11,3 +10,4 @@ collection2
 autocompletion
 spiderable
 service-configuration
+bootstrap-3

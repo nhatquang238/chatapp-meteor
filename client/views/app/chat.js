@@ -57,7 +57,7 @@ Template.chat.events({
 					newMessage.conversationId = newConversation._id;
 					newConversation.members = receiver;
 					Messages.insert(newMessage);
-					Router.go('conversation', newConversation);
+					Router.go('conversations', newConversation);
 				} else if ((duplicate === true) && (newConversation.members.indexOf(currentUser) === -1)) {
 					// if you have messaged this person before and he is not yourself
 					// switch to an existing conversation
@@ -67,7 +67,7 @@ Template.chat.events({
 					newMessage.conversationId = existingConversation._id;
 					existingConversation.members = receiver;
 					Messages.insert(newMessage);
-					Router.go('conversation', existingConversation);
+					Router.go('conversations', existingConversation);
 					existingConversation = null;
 				}
 
@@ -78,24 +78,35 @@ Template.chat.events({
 			} else if (window.location.pathname.indexOf('conversations') !== -1) {
 				// switch to another existing conversation
 				console.log('conversation');
+				var currentUser = Meteor.user().username;
+				var receiver = Router.current().params.members;
+				var currentMembers = [currentUser, receiver];
+				var existingConversation = Conversations.findOne({members: currentMembers});
+				console.log(currentUser + " + " + receiver + " = " + currentMembers);
+				console.log(currentMembers);
+				console.log(existingConversation);
+				var newMessage = {
+					userId: Meteor.user()._id,
+					content: $('#message-content').val(),
+					from: currentUser,
+					to: receiver,
+					submittedTime: Date.now(),
+					// conversationId: existingConversation._id,
+					readStatus: false
+				};
 
+				Messages.insert(newMessage);
+				existingConversation = null;
 			}
 		}
 	},
 	'click .message-preview a': function (e) {
 		var currentChatId = this._id;
-		var targetConversation = this;
-		console.log(targetConversation);
-		targetConversation.members
-			.splice(
-				targetConversation.members
-					.indexOf(Meteor.user().username),
-					1);
 
 		$('#'+currentChatId).removeClass('new').addClass('active');
 		Meteor.subscribe('messages', {chatId: currentChatId});
 
-		Router.go('conversation', targetConversation);
+		Router.go('conversations', this);
 		$('#message-content').focus();
 		currentChatId = null;
 	}

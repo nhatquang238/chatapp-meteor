@@ -23,7 +23,7 @@ Router.map(function() {
   		'newMessage': {to: 'newMessage'}
   	}
   });
-  this.route('conversation', {
+  this.route('conversations', {
   	path: '/conversations/:members',
   	template: 'chat',
   	yieldTemplates: {

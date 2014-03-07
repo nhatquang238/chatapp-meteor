@@ -103,6 +103,7 @@ Template.chat.events({
 	'click .message-preview a': function (e) {
 		var currentChatId = this._id;
 
+		$('.message-preview').removeClass('active');
 		$('#'+currentChatId).removeClass('new').addClass('active');
 		Meteor.subscribe('messages', {chatId: currentChatId});
 

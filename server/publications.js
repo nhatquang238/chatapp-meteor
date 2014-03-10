@@ -1,5 +1,5 @@
-Meteor.publish('messages', function() {
-  return Messages.find();
+Meteor.publish('messages', function(currentConversationId) {
+  return Messages.find({conversationId: currentConversationId});
 });
 
 Meteor.publish('conversations', function () {

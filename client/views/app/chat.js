@@ -12,6 +12,10 @@ Template.chat.helpers({
 	}
 });
 
+Template.chat.rendered = function () {
+	$('#'+Router.current().params._id).removeClass('new').addClass('active');
+}
+
 Template.chat.events({
 	'click #new-conversation': function () {
 		Router.go('newConversation');
@@ -19,6 +23,12 @@ Template.chat.events({
 	'keypress #message-content': function (e) {
 		if (e.keyCode === 13) {
 			// new conversation
+			var scrollTo = function () {
+				var dist = $('.messages').height()-$('.main-container').height();
+				$('.main-container').scrollTop(dist);
+				dist = null;
+			};
+
 			if (window.location.pathname.indexOf('new') !== -1) {
 				var receiver = $('#receiver').val();
 				var currentUser = Meteor.user().username;
@@ -35,11 +45,6 @@ Template.chat.events({
 					submittedTime: Date.now(),
 					readStatus: false
 				}
-				var scrollTo = function () {
-					var dist = $('.messages').height()-$('.main-container').height();
-					$('.main-container').scrollTop(dist);
-					dist = null;
-				}
 
 				Conversations.find().forEach(function (conversation) {
 					if (conversation.members.indexOf(receiver) !== -1) {
@@ -54,7 +59,6 @@ Template.chat.events({
 					newConversation._id = Conversations.insert(newConversation);
 					newMessage.conversationId = newConversation._id;
 
-					console.log(newMessage);
 					Meteor.call('send', newMessage, function (error, id) {
 						if (error)
 							return alert(error.reason);
@@ -117,7 +121,6 @@ Template.chat.events({
 
 		$('.message-preview').removeClass('active');
 		$('#'+currentChatId).removeClass('new').addClass('active');
-		Meteor.subscribe('messages', {chatId: currentChatId});
 
 		Router.go('conversations', this);
 		$('#message-content').focus();

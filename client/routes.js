@@ -3,8 +3,8 @@ Router.configure({
   notFoundTemplate: 'notFound',
   loadingTemplate: 'loading',
   waitOn: function () {
-  	// return [Meteor.subscribe('messages'), Meteor.subscribe('userData')];
-    return Meteor.subscribe('userData');
+  	return [Meteor.subscribe('messages', this.params._id), Meteor.subscribe('userData')];
+    // return Meteor.subscribe('userData');
   }
 });
 
@@ -14,6 +14,19 @@ Router.map(function() {
     template: 'chat',
     yieldTemplates: {
       'messages': {to: 'messages'}
+    },
+    data: {
+      messagePreviews: function () {
+        var messagePreviews = Conversations.find().fetch();
+        var currentUser = Meteor.user().username;
+
+        for (var i = 0; i < messagePreviews.length; i++) {
+          var index = messagePreviews[i].members.indexOf(currentUser);
+          messagePreviews[i].members.splice(index, 1);
+        };
+
+        return messagePreviews;
+      }
     }
   });
   this.route('newConversation', {
@@ -28,19 +41,7 @@ Router.map(function() {
   	template: 'chat',
   	yieldTemplates: {
   		'messages': {to: 'messages'}
-  	},
-    data: function () {
-      console.log(this.params._id);
-      return  Meteor.subscribe('messages', {conversationId: this.params._id});
-    },
-    after: function () {
-      // this.render();
-      var dist = $('.messages').height()-$('.main-container').height();
-      console.log('load after routing ' + dist);
-      $('.main-container').scrollTop(dist);
-      dist = null;
-      $('.message-preview').first().click();
-    }
+  	}
   });
 });
 

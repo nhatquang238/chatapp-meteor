@@ -3,3 +3,9 @@ Template.messages.helpers({
 		return Messages.find();
 	}
 });
+
+Template.messages.rendered = function () {
+	var dist = $('.messages').height()-$('.main-container').height();
+	$('.main-container').scrollTop(dist);
+	dist = null;
+}

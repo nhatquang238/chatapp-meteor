@@ -10,6 +10,7 @@
     "accounts-ui-bootstrap-3": {},
     "collection2": {},
     "autocompletion": {},
-    "bootstrap-3": {}
+    "bootstrap-3": {},
+    "fast-render": {}
   }
 }

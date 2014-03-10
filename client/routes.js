@@ -24,13 +24,21 @@ Router.map(function() {
   	}
   });
   this.route('conversations', {
-  	path: '/conversations/:members',
+  	path: '/conversations/:_id',
   	template: 'chat',
   	yieldTemplates: {
   		'messages': {to: 'messages'}
   	},
+    data: function () {
+      console.log(this.params._id);
+      return  Meteor.subscribe('messages', {conversationId: this.params._id});
+    },
     after: function () {
       // this.render();
+      var dist = $('.messages').height()-$('.main-container').height();
+      console.log('load after routing ' + dist);
+      $('.main-container').scrollTop(dist);
+      dist = null;
       $('.message-preview').first().click();
     }
   });
@@ -48,3 +56,6 @@ var requiredLogin = function () {
 }
 
 Router.before(requiredLogin);
+Router.before(function () {
+  clearError();
+});

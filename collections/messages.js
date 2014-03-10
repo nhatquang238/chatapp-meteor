@@ -17,7 +17,7 @@ Messages = new Meteor.Collection('messages', {
 			label: 'From'
 		},
 		to: {
-			type: String,
+			type: [String],
 			label: 'To'
 		},
 		submittedTime: {
@@ -31,4 +31,17 @@ Messages = new Meteor.Collection('messages', {
 			label: "Read Status"
 		}
 	})
+});
+
+Meteor.methods({
+	send: function (message) {
+		var user = Meteor.user();
+
+		// ensure the user is logged in
+		if(!user)
+			throw new Meteor.Error(401, "You need to login to send new messages");
+
+		var messageId = Messages.insert(message);
+		return messageId;
+	}
 });

@@ -9,7 +9,6 @@ Template.chat.helpers({
 		};
 
 		return messagePreviews;
-		// return Conversations.find();
 	}
 });
 
@@ -24,25 +23,25 @@ Template.chat.events({
 				var receiver = $('#receiver').val();
 				var currentUser = Meteor.user().username;
 				var duplicate = false;
-				var conversations = Conversations.find();
-				var membersArray = [];
-
-				membersArray.push(receiver);
-
+				var membersArray = [receiver];
 				var newConversation = {
 					members: membersArray
 				};
-
 				var newMessage = {
 					userId: Meteor.user()._id,
 					content: $('#message-content').val(),
 					from: currentUser,
-					to: receiver,
+					to: [receiver],
 					submittedTime: Date.now(),
 					readStatus: false
 				}
+				var scrollTo = function () {
+					var dist = $('.messages').height()-$('.main-container').height();
+					$('.main-container').scrollTop(dist);
+					dist = null;
+				}
 
-				conversations.forEach(function (conversation) {
+				Conversations.find().forEach(function (conversation) {
 					if (conversation.members.indexOf(receiver) !== -1) {
 						duplicate = true;
 					}
@@ -51,52 +50,65 @@ Template.chat.events({
 				if ((duplicate === false) && (newConversation.members.indexOf(currentUser) === -1)) {
 					// if you havent messaged this person before and he's not yourself
 					// go to a new conversation
-					console.log('no duplicate');
 					newConversation.members.push(currentUser);
 					newConversation._id = Conversations.insert(newConversation);
 					newMessage.conversationId = newConversation._id;
-					newConversation.members = receiver;
-					Messages.insert(newMessage);
-					Router.go('conversations', newConversation);
+
+					console.log(newMessage);
+					Meteor.call('send', newMessage, function (error, id) {
+						if (error)
+							return alert(error.reason);
+
+						Router.go('conversations', {_id: newConversation._id});
+					});
 				} else if ((duplicate === true) && (newConversation.members.indexOf(currentUser) === -1)) {
 					// if you have messaged this person before and he is not yourself
 					// switch to an existing conversation
-					console.log('duplicate');
 					newConversation.members.push(currentUser);
-					var existingConversation = Conversations.findOne({members: newConversation.members});
-					newMessage.conversationId = existingConversation._id;
-					existingConversation.members = receiver;
-					Messages.insert(newMessage);
-					Router.go('conversations', existingConversation);
-					existingConversation = null;
+
+					var existingConversation = Conversations.findOne({members: {$all: newConversation.members}});
+					if (existingConversation) {
+						newMessage.conversationId = existingConversation._id;
+
+						Meteor.call('send', newMessage, function (error, id) {
+							if (error)
+								return alert(error.reason);
+
+							Router.go('conversations', {_id: existingConversation._id});
+							existingConversation = null;
+							$('#message-content').val('');
+						});
+					} else {
+						console.log('smth is wrong');
+					}
 				}
 
 				// clear memory
-				newConversation = null;
-				newMessage = null;
-				$('#message-content').val('');
+				// newConversation = null;
+				// newMessage = null;
 			} else if (window.location.pathname.indexOf('conversations') !== -1) {
-				// switch to another existing conversation
-				console.log('conversation');
+				// send message when in an existing conversation
+				var existingConversation = Conversations.findOne({_id: Router.current().params._id });
 				var currentUser = Meteor.user().username;
-				var receiver = Router.current().params.members;
-				var currentMembers = [currentUser, receiver];
-				var existingConversation = Conversations.findOne({members: currentMembers});
-				console.log(currentUser + " + " + receiver + " = " + currentMembers);
-				console.log(currentMembers);
-				console.log(existingConversation);
+				var receiver = existingConversation.members.splice(currentUser,1);
+
 				var newMessage = {
 					userId: Meteor.user()._id,
 					content: $('#message-content').val(),
 					from: currentUser,
 					to: receiver,
 					submittedTime: Date.now(),
-					// conversationId: existingConversation._id,
+					conversationId: existingConversation._id,
 					readStatus: false
 				};
 
-				Messages.insert(newMessage);
-				existingConversation = null;
+				Meteor.call('send', newMessage, function (error, id) {
+					if (error)
+						return alert(error.reason);
+
+					scrollTo();
+					$('#message-content').val('');
+				});
 			}
 		}
 	},

@@ -1,14 +1,21 @@
 Template.chat.helpers({
 	messagePreviews: function () {
-		var messagePreviews = Conversations.find().fetch();
-		var currentUser = Meteor.user().username;
+		if (Meteor.user()) {
+			if (!Meteor.loggingIn()) {
+				console.log('messagePreview');
+				var messagePreviews = Conversations.find().fetch();
+				var currentUser = Meteor.user().username;
 
-		for (var i = 0; i < messagePreviews.length; i++) {
-			var index = messagePreviews[i].members.indexOf(currentUser);
-			messagePreviews[i].members.splice(index, 1);
-		};
+				console.log(currentUser);
+				for (var i = 0; i < messagePreviews.length; i++) {
+					var index = messagePreviews[i].members.indexOf(currentUser);
+					messagePreviews[i].members.splice(index, 1);
+				};
 
-		return messagePreviews;
+				console.log(Conversations.find().fetch());
+				return messagePreviews;
+			}
+		}
 	}
 });
 

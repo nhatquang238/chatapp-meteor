@@ -13,7 +13,8 @@
       "collection2": {},
       "autocompletion": {},
       "bootstrap-3": {},
-      "fast-render": {}
+      "fast-render": {},
+      "moment": {}
     },
     "packages": {
       "iron-router": {
@@ -55,6 +56,11 @@
         "git": "https://github.com/arunoda/meteor-fast-render.git",
         "tag": "v0.1.18",
         "commit": "dbfc8178594e5f696a39541278aac5dd25d458a0"
+      },
+      "moment": {
+        "git": "https://github.com/acreeger/meteor-moment.git",
+        "tag": "v2.5.1",
+        "commit": "8c9bc5d3fc96705057737cb9743d555417f6e551"
       },
       "simple-schema": {
         "git": "https://github.com/aldeed/meteor-simple-schema.git",

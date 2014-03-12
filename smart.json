@@ -11,6 +11,7 @@
     "collection2": {},
     "autocompletion": {},
     "bootstrap-3": {},
-    "fast-render": {}
+    "fast-render": {},
+    "moment": {}
   }
 }

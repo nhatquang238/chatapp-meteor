@@ -10,5 +10,7 @@ Messages.allow({
 
 // only allow access to conversations collection if signed in
 Conversations.allow({
-	insert: signedIn
+	insert: signedIn,
+	update: signedIn,
+	remove: signedIn
 });

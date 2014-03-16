@@ -13,8 +13,8 @@ Template.chat.helpers({
 		}
 	},
 	unreadMsgsCount: function () {
-		var count = Notifications.findOne({notifiedId: Meteor.userId(), conversationId: this._id}).count;
-		if (count > 0) {
+		var  currentNotification = Notifications.findOne({notifiedId: Meteor.userId(), conversationId: this._id});
+		if (currentNotification && (currentNotification.count > 0)) {
 			return Notifications.findOne({notifiedId: Meteor.userId(), conversationId: this._id}).count;
 		}
 	}
@@ -69,7 +69,6 @@ Template.chat.events({
 					duplicate = null;
 				}
 
-				console.log('userExist: ' + userExist + ', duplicate: ' + duplicate);
 				if ((duplicate === false) && (existingConversation === undefined)) {
 					// if you havent messaged this person before and he's not yourself
 					// go to a new conversation
@@ -84,7 +83,6 @@ Template.chat.events({
 						createdAt: new Date()
 					};
 
-					console.log(newNotification);
 					Meteor.call('sendMsg', newMessage, function (error, id) {
 						if (error)
 							return alert(error.reason);
@@ -177,11 +175,15 @@ Template.chat.events({
 
 		Router.go('conversations', this);
 
-		$('#message-content').focus();
 		currentConversationId = null;
 	},
 	'focus #message-content': function (e) {
 		// if a user focus on the chat box
-		// don't show unread count for him
+		// reset his notification
+		var conversationId = Router.current().params._id;
+		var currentNotification = Notifications.findOne({conversationId: conversationId, notifiedId: Meteor.userId()});
+		if (currentNotification) {
+			Notifications.update(currentNotification._id, {$set: {read: true, count: 0, createdAt: new Date()}});
+		}
 	}
 });

@@ -3,14 +3,6 @@ Conversations = new Meteor.Collection('conversations', {
 		members: {
 			type: [String],
 			label: 'Members'
-		},
-		unreadMsgsCount: {
-			type: Number,
-			label: 'Unread Messages Count'
-		},
-		lastSeenBy: {
-			type: String,
-			label: 'Last Seen By'
 		}
 	})
 });

@@ -16,10 +16,13 @@
 				<!-- Collect the nav links, forms, and other content for toggling -->
 				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 					<ul class="nav navbar-nav">
-						<li class="active"><a href="{{pathFor 'chat'}}">Chat Room</a></li>
+						<li class="active">
+							<a href="{{pathFor 'chat'}}">Messages</a>
+							<span class="badge unreadConversations" id="unreadConversations">{{unreadConversationsCount}}</span>
+						</li>
 					</ul>
 					<ul class="nav navbar-nav navbar-right">
-						{{ loginButtons }}
+						{{loginButtons}}
 					</ul>
 				</div><!-- /.navbar-collapse -->
 			</div><!-- /.container-fluid -->

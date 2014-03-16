@@ -14,3 +14,8 @@ Conversations.allow({
 	update: signedIn,
 	remove: signedIn
 });
+
+Notifications.allow({
+	insert: signedIn,
+	update: signedIn
+});

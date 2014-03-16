@@ -4,14 +4,24 @@
     "branch": "master"
   },
   "packages": {
-    "iron-router": {},
+    "iron-router": {
+      "git": "https://github.com/EventedMind/iron-router.git",
+      "branch": "master"
+    },
     "scss": {},
     "spin": {},
-    "accounts-ui-bootstrap-3": {},
+    "accounts-ui-bootstrap-3": {
+      "git": "https://github.com/mangasocial/meteor-accounts-ui-bootstrap-3",
+      "branch": "master"
+      },
     "collection2": {},
     "autocompletion": {},
     "bootstrap-3": {},
     "fast-render": {},
-    "moment": {}
+    "moment": {},
+    "blaze-layout": {
+      "git": "https://github.com/EventedMind/blaze-layout.git",
+      "branch": "master"
+    }
   }
 }

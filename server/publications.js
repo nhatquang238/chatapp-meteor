@@ -6,6 +6,10 @@ Meteor.publish('conversations', function () {
 	return Conversations.find({members: Meteor.users.findOne(this.userId).username});
 });
 
+Meteor.publish('notifications', function (userId) {
+	return Notifications.find({userId: userId});
+});
+
 Meteor.publish('userData', function () {
 	return Meteor.users.find(
 		{},

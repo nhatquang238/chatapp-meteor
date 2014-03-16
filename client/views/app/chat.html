@@ -6,9 +6,7 @@
 			{{#each messagePreviews}}
 			<div class="message-preview" id="{{_id}}">
 				<a class="name">{{members}}</a>
-				{{#if isNotReceiver}}
-				<span class="badge">{{unreadMsgsCount}}</span>
-				{{/if}}
+				<span class="badge unreadMsg">{{unreadMsgsCount}}</span>
 				<span class="glyphicon glyphicon-remove delete-conversation"></span>
 			</div>
 			{{/each}}

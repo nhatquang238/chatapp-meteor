@@ -71,16 +71,15 @@ input.search-conversation {
         top: 22px;
         right: 22px;
     }
-    &.active .badge {
-        background: #fff;
-        color: $green;
-    }
-}
-
-.active {
-    background: $green !important;
-    & a {
-        color: #f2f2f2;
+    &.active {
+        background: $green !important;
+        & a {
+            color: #f2f2f2;
+        }
+        & .badge {
+            background: #fff;
+            color: $green;
+        }
     }
 }
 
@@ -355,4 +354,11 @@ input.search-conversation {
 
 .hide {
     display: none !important;
+}
+
+.unreadConversations {
+    position: absolute;
+    right: 5px;
+    top: 8px;
+    background: $green;
 }

@@ -21,24 +21,16 @@ Messages = new Meteor.Collection('messages', {
 			label: 'To'
 		},
 		submittedTime: {
-			type: Number,
-			optional: true,
+			type: Date,
 			label: 'Submitted Time'
-		},
-		readStatus: {
-			type: Boolean,
-			optional: true,
-			label: "Read Status"
 		}
 	})
 });
 
 Meteor.methods({
-	send: function (message) {
-		var user = Meteor.user();
-
+	sendMsg: function (message, receiver) {
 		// ensure the user is logged in
-		if(!user)
+		if(!Meteor.user())
 			throw new Meteor.Error(401, "You need to login to send new messages");
 
 		var messageId = Messages.insert(message);

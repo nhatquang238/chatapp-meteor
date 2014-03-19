@@ -66,12 +66,20 @@ input.search-conversation {
     & p {
         margin-bottom: 1.2em;
     }
-}
-
-.active {
-    background: $green !important;
-    & a {
-        color: #f2f2f2;
+    & .badge {
+        position: absolute;
+        top: 22px;
+        right: 22px;
+    }
+    &.active {
+        background: $green !important;
+        & a {
+            color: #f2f2f2;
+        }
+        & .badge {
+            background: #fff;
+            color: $green;
+        }
     }
 }
 
@@ -346,4 +354,11 @@ input.search-conversation {
 
 .hide {
     display: none !important;
+}
+
+.unreadConversations {
+    position: absolute;
+    right: 5px;
+    top: 8px;
+    background: $green;
 }

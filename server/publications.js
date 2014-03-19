@@ -2,12 +2,17 @@ Meteor.publish('messages', function(currentConversationId) {
   return Messages.find({conversationId: currentConversationId});
 });
 
-Meteor.publish('conversations', function () {
-	return Conversations.find({members: Meteor.users.findOne(this.userId).username});
+Meteor.publish('conversations', function (username) {
+	// return Conversations.find({members: Meteor.users.findOne(this.userId).username});
+	return Conversations.find({members: username})
 });
 
-Meteor.publish('notifications', function (userId) {
-	return Notifications.find({userId: userId});
+// Meteor.publish('notifications', function (userId) {
+// 	return Notifications.find({sentId: userId});
+// });
+
+Meteor.publish('notifications', function () {
+	return Notifications.find();
 });
 
 Meteor.publish('userData', function () {

@@ -4,9 +4,11 @@ Template.header.helpers({
 		return Session.get('pageTitle');
 	},
 	unreadConversationsCount: function () {
-		var count = Notifications.find({notifiedId: Meteor.userId(), count: {$gt: 0}}).count();
-		if (count > 0) {
-			return count;
+		if (Meteor.user()) {
+			var count = Notifications.find({notifiedId: Meteor.userId(), count: {$gt: 0}}).count();
+			if (count > 0) {
+				return count;
+			}
 		}
 	}
 });

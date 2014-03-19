@@ -1,7 +1,7 @@
 Template.chat.helpers({
 	messagePreviews: function () {
 		if (Meteor.user()) {
-			var messagePreviews = Conversations.find().fetch();
+			messagePreviews = Conversations.find().fetch();
 			var currentUser = Meteor.user().username;
 
 			for (var i = 0; i < messagePreviews.length; i++) {
@@ -13,9 +13,11 @@ Template.chat.helpers({
 		}
 	},
 	unreadMsgsCount: function () {
-		var  currentNotification = Notifications.findOne({notifiedId: Meteor.userId(), conversationId: this._id});
-		if (currentNotification && (currentNotification.count > 0)) {
-			return Notifications.findOne({notifiedId: Meteor.userId(), conversationId: this._id}).count;
+		if (Meteor.user()) {
+			var  currentNotification = Notifications.findOne({notifiedId: Meteor.userId(), conversationId: this._id});
+			if (currentNotification && (currentNotification.count > 0)) {
+				return Notifications.findOne({notifiedId: Meteor.userId(), conversationId: this._id}).count;
+			}
 		}
 	}
 });
@@ -164,6 +166,9 @@ Template.chat.events({
 
 					scrollTo();
 					$('#message-content').val('');
+					existingConversation = null;
+					receiver = null;
+					newMessage = null;
 				});
 			}
 		}
@@ -175,15 +180,25 @@ Template.chat.events({
 
 		Router.go('conversations', this);
 
+		if (window.location.pathname.indexOf('conversations') !== -1) {
+			var conversationId = Router.current().params._id;
+			var currentNotification = Notifications.findOne({conversationId: conversationId, notifiedId: Meteor.userId()});
+			if (currentNotification) {
+				Notifications.update(currentNotification._id, {$set: {read: true, count: 0, createdAt: new Date()}});
+			}
+			conversationId = null;
+		}
+
 		currentConversationId = null;
 	},
-	'focus #message-content': function (e) {
-		// if a user focus on the chat box
-		// reset his notification
-		var conversationId = Router.current().params._id;
-		var currentNotification = Notifications.findOne({conversationId: conversationId, notifiedId: Meteor.userId()});
-		if (currentNotification) {
-			Notifications.update(currentNotification._id, {$set: {read: true, count: 0, createdAt: new Date()}});
+	'click #message-content': function () {
+		if (window.location.pathname.indexOf('conversations') !== -1) {
+			var conversationId = Router.current().params._id;
+			var currentNotification = Notifications.findOne({conversationId: conversationId, notifiedId: Meteor.userId()});
+			if (currentNotification) {
+				Notifications.update(currentNotification._id, {$set: {read: true, count: 0, createdAt: new Date()}});
+			}
+			conversationId = null;
 		}
 	}
 });

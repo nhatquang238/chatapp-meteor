@@ -3,16 +3,11 @@ Meteor.publish('messages', function(currentConversationId) {
 });
 
 Meteor.publish('conversations', function (username) {
-	// return Conversations.find({members: Meteor.users.findOne(this.userId).username});
 	return Conversations.find({members: username})
 });
 
-// Meteor.publish('notifications', function (userId) {
-// 	return Notifications.find({sentId: userId});
-// });
-
-Meteor.publish('notifications', function () {
-	return Notifications.find();
+Meteor.publish('notifications', function (options) {
+	return Notifications.find(options);
 });
 
 Meteor.publish('userData', function () {

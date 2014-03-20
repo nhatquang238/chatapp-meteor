@@ -22,10 +22,6 @@ Template.chat.helpers({
 	}
 });
 
-Template.chat.rendered = function () {
-	$('#'+Router.current().params._id).removeClass('new').addClass('active');
-}
-
 Template.chat.events({
 	'click #new-conversation': function () {
 		Router.go('newConversation');
@@ -93,6 +89,7 @@ Template.chat.events({
 					Meteor.call('notify', newNotification, function (error, id) {
 						if (error)
 							return alert(error.reason);
+						$('#message-content').val('');
 
 						Router.go('conversations', {_id: newMessage.conversationId});
 					});
@@ -113,11 +110,16 @@ Template.chat.events({
 					Meteor.call('sendMsg', newMessage, function (error, id) {
 						if (error)
 							return alert(error.reason);
+					});
+
+					Meteor.call('notify', newNotification, function (error, id) {
+						if (error)
+							return alert(error.reason);
 
 						Notifications.insert(newNotification);
-						Router.go('conversations', {_id: existingConversation._id});
-
 						$('#message-content').val('');
+
+						Router.go('conversations', {_id: existingConversation._id});
 					});
 				}
 			} else if (window.location.pathname.indexOf('conversations') !== -1) {

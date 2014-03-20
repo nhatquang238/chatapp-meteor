@@ -4,11 +4,7 @@
 		<div class="col-md-4 col-sm-4 col-xs-4 preview">
 			<input type="text" class="search-conversation" placeholder="Search inbox">
 			{{#each messagePreviews}}
-			<div class="message-preview" id="{{_id}}">
-				<a class="name">{{members}}</a>
-				<span class="badge unreadMsg">{{unreadMsgsCount}}</span>
-				<span class="glyphicon glyphicon-remove delete-conversation"></span>
-			</div>
+				{{> messagePreview}}
 			{{/each}}
 		</div>
 		<div class="col-md-8 col-sm-8 col-xs-8 chat-main">
@@ -16,8 +12,8 @@
 				<div class="btn btn-primary new-conversation" id="new-conversation"><span class="glyphicon glyphicon-plus"></span>New conversation</div>
 			</div>
 			<div class="main-container">
-				{{yield "messages"}}
-				{{yield "newMessage"}}
+				{{> yield region="messages"}}
+				{{> yield region="newMessage"}}
 			</div>
 			<div class="create-message-container">
 				<textarea name="message-content" id="message-content" class="message-content" cols="30" rows="10" autofocus placeholder="Write a message..."></textarea>

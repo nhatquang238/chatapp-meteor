@@ -23,7 +23,10 @@ Template.chat.helpers({
 });
 
 Template.chat.rendered = function () {
-	$('#'+Router.current().params._id).removeClass('new').addClass('active');
+	console.log('chat template is rendered');
+	$('#'+Router.current().params._id).addClass('active');
+	console.log('active class is added');
+	$('#message-content').val('');
 }
 
 Template.chat.events({
@@ -113,12 +116,17 @@ Template.chat.events({
 					Meteor.call('sendMsg', newMessage, function (error, id) {
 						if (error)
 							return alert(error.reason);
+					});
+
+					Meteor.call('notify', newNotification, function (error, id) {
+						if (error)
+							return alert(error.reason);
 
 						Notifications.insert(newNotification);
 						Router.go('conversations', {_id: existingConversation._id});
 
 						$('#message-content').val('');
-					});
+					})
 				}
 			} else if (window.location.pathname.indexOf('conversations') !== -1) {
 				// send message when in an existing conversation

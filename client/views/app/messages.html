@@ -1,12 +1,8 @@
 <template name="messages">
 	<div class="messages">
+		<a href="#" class="load-more-messages {{hideLoadMoreClass}}">Load more messages...</a>
 		{{#each messages}}
-		<div class="message">
-			<p class="sender">{{from}}</p>
-			<div class="content">
-				{{content}}
-			</div>
-		</div>
+			{{> message}}
 		{{/each}}
 	</div>
 </template>

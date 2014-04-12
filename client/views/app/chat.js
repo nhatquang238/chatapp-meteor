@@ -1,7 +1,7 @@
 Template.chat.helpers({
 	messagePreviews: function () {
 		if (Meteor.user()) {
-			messagePreviews = Conversations.find().fetch();
+			var messagePreviews = Conversations.find().fetch();
 			var currentUser = Meteor.user().username;
 
 			for (var i = 0; i < messagePreviews.length; i++) {
@@ -34,6 +34,7 @@ Template.chat.events({
 				$('.main-container').scrollTop(dist);
 				dist = null;
 			};
+			var LIMIT_INCREMENT = 1;
 
 			if (window.location.pathname.indexOf('new') !== -1) {
 				var receiver = $('#receiver').val();
@@ -134,6 +135,7 @@ Template.chat.events({
 					submittedTime: new Date(),
 					conversationId: existingConversation._id
 				};
+
 				// clear current'user notification
 				currentNotification = Notifications.findOne({notifiedId: Meteor.userId(), conversationId: existingConversation._id});
 				if (currentNotification) {
@@ -144,11 +146,19 @@ Template.chat.events({
 					if (error)
 						return alert(error.reason);
 
+					console.log('send message, limit is ' + Session.get('itemsLimit'));
+					if (Messages.find({conversationId: existingConversation._id}).count() >= INITIAL_LIMIT) {
+						Session.set('itemsLimit', Session.get('itemsLimit') + LIMIT_INCREMENT);
+						console.log('limit after updated is ' + Session.get('itemsLimit'));
+					}
+
 					// check if there's an exisiting notification from current user
+					// if not, create a new notification
 					var notificationFromUser = Notifications.findOne({sentId: Meteor.userId(), conversationId: existingConversation._id});
+
+					// if the receiver has not read previous messages, increase count by 1
+					// else reset his notification to 1
 					if (notificationFromUser) {
-						// if the receiver has not read previous messages, increase count by 1
-						// else reset his notification to 1
 						if (notificationFromUser.read === false) {
 							Notifications.update(notificationFromUser._id, {$inc: {count: 1},$set: {createdAt: new Date()}});
 						} else {
@@ -175,7 +185,7 @@ Template.chat.events({
 			}
 		}
 	},
-	'click .message-preview a': function (e) {
+	'click .message-preview a': function () {
 		var currentConversationId = this._id;
 		$('.message-preview').removeClass('active');
 		$('#'+currentConversationId).addClass('active');
@@ -201,6 +211,11 @@ Template.chat.events({
 				Notifications.update(currentNotification._id, {$set: {read: true, count: 0, createdAt: new Date()}});
 			}
 			conversationId = null;
+		}
+	},
+	'keypress #searchConversation': function () {
+		if (e.keyCode === 13) {
+			var targetPerson = $('#searchConversation').val();
 		}
 	}
 });

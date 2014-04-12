@@ -110,7 +110,7 @@ input.search-conversation {
     }
 }
 
-.delete-conversation {
+.delete-conversation, .notified:after {
     top: 26px;
     right: 7px;
     font-size: 0.7em;
@@ -139,6 +139,10 @@ input.search-conversation {
     }
 }
 
+.load-more-messages {
+    display: block;
+    padding: 0.3em 1.5em 0;
+}
 .sender {
     font-weight: bold;
     padding: 0 1.5em 0.3em;
@@ -361,4 +365,19 @@ input.search-conversation {
     right: 5px;
     top: 8px;
     background: $green;
+}
+
+.notified:after {
+    position: absolute;
+    display: block;
+    content: '';
+    width: 8px;
+    height: 8px;
+    right: 20px;
+    border-radius: 4px;
+    background: $green;
+}
+
+.active.notified:after {
+    background: white;
 }

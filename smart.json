@@ -1,23 +1,19 @@
 {
-  "meteor": {
-    "git": "https://github.com/meteor/meteor.git",
-    "branch": "shark"
-  },
+  "meteor": {},
   "packages": {
-    "iron-router": {
-      "git": "https://github.com/EventedMind/iron-router.git",
-      "branch": "blaze-integration"
-    },
+    "iron-router": {},
     "scss": {},
     "spin": {},
     "accounts-ui-bootstrap-3": {
       "git": "https://github.com/mangasocial/meteor-accounts-ui-bootstrap-3.git",
       "branch": "blaze"
-      },
+    },
     "collection2": {},
     "autocompletion": {},
     "bootstrap-3": {},
     "fast-render": {},
-    "moment": {}
+    "moment": {},
+    "ogno-admin": {},
+    "filter-collections": {}
   }
 }

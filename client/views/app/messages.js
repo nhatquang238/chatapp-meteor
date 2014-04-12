@@ -1,11 +1,10 @@
 Template.messages.helpers({
 	messages: function () {
-		return Messages.find();
+		return Messages.find({}, {sort: {submittedTime: 1}});
+	},
+	hideLoadMoreClass: function () {
+		if (Messages.find({conversationId: Router.current().params._id}).count() < INITIAL_LIMIT) {
+			return 'hide';
+		}
 	}
 });
-
-Template.messages.rendered = function () {
-	var dist = $('.messages').height()-$('.main-container').height();
-	$('.main-container').scrollTop(dist);
-	dist = null;
-}

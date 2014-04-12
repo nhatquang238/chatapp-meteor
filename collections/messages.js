@@ -32,7 +32,6 @@ Meteor.methods({
 		// ensure the user is logged in
 		if(!Meteor.user())
 			throw new Meteor.Error(401, "You need to login to send new messages");
-
 		var messageId = Messages.insert(message);
 		return messageId;
 	}

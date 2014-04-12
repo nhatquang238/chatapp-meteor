@@ -2,7 +2,7 @@
 	{{#if currentUser}}
 	<div class="col-md-12 col-sm-12 col-xs-12">
 		<div class="col-md-4 col-sm-4 col-xs-4 preview">
-			<input type="text" class="search-conversation" placeholder="Search inbox">
+			<input id="searchConversation" type="text" class="search-conversation" placeholder="Search inbox">
 			{{#each messagePreviews}}
 				{{> messagePreview}}
 			{{/each}}

@@ -14,3 +14,11 @@ Template.messagePreview.helpers({
 		}
 	}
 });
+
+Template.messagePreview.events({
+	'click .delete-conversation': function () {
+		Meteor.call('deleteMsgs', this._id);
+		Meteor.call('deleteNotificationf', this._id);
+		Conversations.remove({_id: this._id});
+	}
+});

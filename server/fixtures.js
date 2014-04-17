@@ -23,4 +23,9 @@ if (Meteor.users.find().count() === 0) {
 		username: 'chaien',
 		password: 'foofoobar'
 	});
+
+	Accounts.createUser({
+		username: 'sneakycocoon',
+		password: 'foofoobar'
+	});
 }

@@ -34,5 +34,11 @@ Meteor.methods({
 
 		var notificationId = Notifications.insert(notification);
 		return notificationId;
+	},
+	deleteNotification: function (conversationId) {
+		if (!Meteor.user())
+			throw new Meteor.error(401, 'You need to login to create notification')
+
+		Notifications.remove({conversationId: conversationId});
 	}
 })

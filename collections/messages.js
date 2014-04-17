@@ -34,5 +34,10 @@ Meteor.methods({
 			throw new Meteor.Error(401, "You need to login to send new messages");
 		var messageId = Messages.insert(message);
 		return messageId;
+	},
+	deleteMsgs: function (conversationId) {
+		if (!Meteor.user())
+			throw new Meteor.Error(401, "You need to login to delete messages");
+		Messages.remove({conversationId: conversationId});
 	}
 });
